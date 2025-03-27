@@ -8,26 +8,36 @@ namespace ConsoleAppForEmployee
 {
     class Department
     {
-        public Department(string name, int employeeLimit, Employee[] employees)
-        {
-            _name = name;
-            _employeeLimit = employeeLimit;
-            _employees = employees;
-        }
 
         public string _name { get; set; }
         public int _employeeLimit { get; set; }
-        public Employee[] _employees { get; set; }
 
-        public void AddEmployee(string name, decimal salary)
+        public Employee[] _employees;
+        public Department(string name, int employeeLimit)
         {
-            Employee employee = new Employee(name, salary);
+            _name = name;
+            _employeeLimit = employeeLimit;
+            _employees = new Employee[0];
         }
 
-        public void GetAllEmployees()
+        public void AddEmployee(Employee employee)
         {
-            foreach (Employee emp in _employees)
-                Console.WriteLine(emp);
+            Array.Resize(ref _employees, _employees.Length + 1);
+            _employees[^1] = employee;
+        }
+
+        public Employee[] GetAllEmployees()
+        {
+            return _employees;
+        }
+
+        public void GetAndPrintAllEmployees()
+        {
+            Employee[] employees = GetAllEmployees();
+            foreach (Employee employee in employees)
+            {
+                Console.WriteLine($"Name: {employee._name}, Salary: {employee._salary}");
+            }
         }
     }
 }
