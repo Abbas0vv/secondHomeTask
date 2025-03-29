@@ -8,7 +8,6 @@ namespace ConsoleAppForEmployee
 {
     class Department
     {
-
         public string _name { get; set; }
         public int _employeeLimit { get; set; }
 
@@ -28,16 +27,17 @@ namespace ConsoleAppForEmployee
 
         public Employee[] GetAllEmployees()
         {
-            return _employees;
+            if (_employees is not null)
+                return _employees;
+            else
+                return null;
         }
 
         public void GetAndPrintAllEmployees()
         {
             Employee[] employees = GetAllEmployees();
             foreach (Employee employee in employees)
-            {
-                Console.WriteLine($"Name: {employee._name}, Salary: {employee._salary}");
-            }
+                employee.ShowInfo();
         }
     }
 }
